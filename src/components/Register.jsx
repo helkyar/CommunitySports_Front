@@ -10,6 +10,9 @@ import InputCustom from "./forms/InputCustom";
 import { SelectCustom } from "./forms/SelectCustom";
 import { DateCustom } from "./forms/DateCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
+import { CreateEvent } from "./CreateEvent";
+
+const genders = ['male','female','other']
 
 const schema = yup.object().shape({
   username:yup
@@ -38,6 +41,7 @@ const schema = yup.object().shape({
   ,
   gender : yup
   .string()
+  .oneOf(genders)
   .required()
 })
 
@@ -76,8 +80,7 @@ export const Register = () => {
     if (isLogged) navigate("/");
   }, [isLogged, navigate]);
 
-  return (
-    <>
+  return (<>
       <form className="register-form session-form" onSubmit={handleSubmit(onSubmit)}>
       <InputCustom
           name='username'
@@ -109,21 +112,22 @@ export const Register = () => {
         />
         <DateCustom
         name='age'
-        label='date of birth'
+        label='Birthday'
         errors={errorsRegister.age}
         control={controlRegister}
-        placeholder='date of birth'
+        type='date'
         id='date-input'/>
         <SelectCustom
           name='gender'
           control={controlRegister}
           label='gender'
           id='gender-input'
-          options={['male','female','other']}/>
+          options={genders}/>
         <Button variant="contained" type="submit" className="list--buttons">
           Register 
         </Button>
       </form>
+      <CreateEvent/>
     </>
   );
 };

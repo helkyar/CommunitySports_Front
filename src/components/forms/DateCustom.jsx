@@ -1,23 +1,26 @@
 import React from 'react'
 import { Controller } from "react-hook-form";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {
+    TextField, InputAdornment
+  } from "@mui/material";
 
 
-export const DateCustom = ({name, control, label, id,placeholder, errors}) => {
+export const DateCustom = ({name, control, label, id,type, errors,defaultValue,}) => {
     return (<>
         <Controller
         name={name}
         control={control}
         render={({ field }) => (
-            <DatePicker
+            <TextField
             {...field}
             id={id}
             label={label}
+            type={type}
             className='form--date-input'
-            placeholderText={placeholder}
-            onChange={(date) => field.onChange(date)}
-            selected={field.value}
+            defaultValue={defaultValue ? defaultValue : null}
+            InputLabelProps={{
+                shrink:true
+            }}
             />
         )}
         />

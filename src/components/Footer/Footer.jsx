@@ -4,6 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { FilterCenter } from 'components/FilterCenter/FilterCenter';
 
 export const Footer = () => {
     const [t, i18n] = useTranslation("global");
@@ -24,6 +25,7 @@ export const Footer = () => {
     return (
         <footer className="footer--main">
             <div className="app--wrapper">
+                <FilterCenter search={'center'} />
                 <div className="footer--slot">
                     {internalLinks.map((e, i) => {
                         return <p className='footer--link' key={i}>{e.text}</p>

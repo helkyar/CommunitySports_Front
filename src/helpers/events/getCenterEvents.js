@@ -1,15 +1,9 @@
 import axios from "axios";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 
-export default function getEvents(params, jwt) {
-  const keys = ["sex"];
-  let queryString = "";
-  keys.forEach((key) => {
-    queryString += `${key}=${params[key]}&`;
-  });
-
+export default function getCenterEvents(id, jwt) {
   return axios
-    .get(`${ENDPOINT}/event/search?${queryString}`, {
+    .get(`${ENDPOINT}/event/center/${id}`, {
       headers: {
         authorization: jwt,
       },

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "sportid": "11111",
+    "author": "111",
+    "accessibility": 2,
+    "date": "01-01-2022T10:00",
+    "sex": "f",
+    "level": 5,
+    "placeid": "1111111111111",
+    "latitud": -3.7086993281311904,
+    "longitud": 40.47876758357458
+  },
+  {
+    "id": "2",
+    "sportid": "22222",
+    "author": "222",
+    "accessibility": 3,
+    "date": "02-02-2022T10:00",
+    "sex": "a",
+    "level": 2,
+    "placeid": "22222222222",
+    "latitud": -3.6737317205040503,
+    "longitud": 40.42810291538114
+  }
+]

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { useSession } from "helpers/session/useSession";
 import { Button } from "@mui/material";
 import * as yup from "yup";
@@ -54,7 +54,10 @@ const schema = yup.object().shape({
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [t, i18n] = useTranslation("global");
   const { loger, isLogged } = useSession();
+
+
 
   const {
     control: controlRegister,
@@ -85,14 +88,14 @@ export const Register = () => {
       <InputCustom
           name='username'
           control={controlRegister}
-          label="userName"
+          label={t('forms.username')}
           id="username-input"
           errors={errorsRegister.username}
         />
         <InputCustom
           name="email"
           control={controlRegister}
-          label="email"
+          label={t('forms.email')}
           id="email-input"
           errors={errorsRegister.email}
         />
@@ -100,19 +103,19 @@ export const Register = () => {
           name="password"
           control={controlRegister}
           id="password-input"
-          label="password"
+          label={t('forms.password')}
           errors={errorsRegister.password}
         />
         <InputCustomPassword
           name="passwordConfirmation"
           control={controlRegister}
           id="passwordConfirmation-input"
-          label="confirm password"
+          label={t('forms.confirm-password')}
           errors={errorsRegister.passwordConfirmation}
         />
         <DateCustom
         name='age'
-        label='Birthday'
+        label={t('forms.Birthday')}
         errors={errorsRegister.age}
         control={controlRegister}
         type='date'
@@ -120,7 +123,7 @@ export const Register = () => {
         <SelectCustom
           name='genre'
           control={controlRegister}
-          label='gender'
+          label={t('forms.gender')}
           id='gender-input'
           options={genders}/>
           <CheckboxCustom
@@ -129,7 +132,7 @@ export const Register = () => {
           errors={errorsRegister.subscriber}
           label='subscriber'/>
         <Button variant="contained" type="submit" className="list--buttons">
-          Register
+          {t('forms.register')}
         </Button>
       </form>
      

@@ -5,8 +5,8 @@ import HearingIcon from '@mui/icons-material/Hearing';
 export const LateralButtons = ({ adapt, setAdapt }) => {
     const discapacities = [
         { icon: <AccessibleForwardIcon />, value: 'mobility' },
-        { icon: <VisibilityIcon />, value: 'ind_magnetica' },
-        { icon: <HearingIcon />, value: 'podotactile' }
+        { icon: <VisibilityIcon />, value: 'podotactile' },
+        { icon: <HearingIcon />, value: 'ind_magnetica' }
     ]
 
     const addAdapt = (discapacity) => {

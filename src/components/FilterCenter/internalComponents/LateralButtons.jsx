@@ -6,7 +6,7 @@ export const LateralButtons = ({ adapt, setAdapt }) => {
     const discapacities = [
         { icon: <AccessibleForwardIcon />, value: 'mobility' },
         { icon: <VisibilityIcon />, value: 'ind_magnetica' },
-        { icon: <HearingIcon />, value: '' }
+        { icon: <HearingIcon />, value: 'podotactile' }
     ]
 
     const addAdapt = (discapacity) => {

@@ -41,13 +41,11 @@ export const FilterCenter = ({ search }) => {
         for (const center of data) {
             let comp = false
             for (const sport of sports) {
-                console.log({ sport });
                 if (center.sports.indexOf(sport, 0) > -1) {
                     comp = true
                 }
             }
             for (const discapacitie of adapt) {
-                console.log({ discapacitie });
                 if (center[discapacitie] > -1) {
                     comp = true
                 }

@@ -57,7 +57,11 @@
         "search": "Search",
         "back": "Back",
         "gender" : "gender",
-        "Birthday" : "Birthday"
+        "Birthday" : "Birthday",
+        "leave": "Leave event",
+        "signIn": "Sign In",
+        "no-organizer": "No organizer",
+        "places": "Available places"
     },
     "sports": {
         "Atletismo": "Athletics",

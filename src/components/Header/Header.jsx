@@ -54,7 +54,7 @@ export const Header = () => {
       <div className="app--wrapper">
         <div className="header--display-group header--display-left">
           <Link to={"/"} className="header--title">
-            {t("header.title")}
+            Movelette
           </Link>
           <nav className="header--nav">
             {navLinks.map((e, i) => {

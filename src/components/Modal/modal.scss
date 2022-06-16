@@ -12,26 +12,39 @@
   backdrop-filter: blur(2px);
   z-index: 10000;
   .modal {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
     margin: auto;
+    margin-top: 200px;
     min-height: 200px;
     height: -webkit-min-content;
     height: -moz-min-content;
     height: min-content;
-    min-width: 200px;
+    min-width: 100px;
     max-width: 300px;
     border-radius: 8px;
     z-index: 3000;
-    padding: 1.5rem;
+    padding: 20px;
     background-color: white;
     overflow-wrap: break-word;
     width: 100%;
     @media (min-width: 450px) {
       max-width: 450px;
     }
+  }
+}
+
+.button-primary {
+  border: none;
+  outline: none;
+  border-radius: 100%;
+  color: white;
+  font-weight: bolder;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  box-shadow: 0 0 1px #bc0505;
+
+  &:hover {
+    box-shadow: 0 0 5px #bc0505;
+    text-shadow: 0 0 3px white;
   }
 }

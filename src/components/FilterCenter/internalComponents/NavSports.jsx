@@ -85,7 +85,7 @@ export const NavSports = ({ setSports: setSportsParent, sports: sportsParent }) 
                 }}
             >
                 {sports !== null ?
-                    sports.map((e, i) => {
+                    sports?.map((e, i) => {
                         const translation = `sports.${removeAccents(e.name)}`
                         const sport = { text: t(translation), id: e.id }
                         return (

@@ -16,6 +16,7 @@ import { Header } from "components/Header/Header";
 import { UserContextProvider } from "./contexts/user";
 import { Footer } from "components/Footer/Footer";
 import { EventDetail } from "views/EventDetail";
+import { Sports } from "views/Sports/Sports";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<LandPage />} />
             <Route path="/login" element={<Session />} />
             <Route path="/main" element={<Main />} />
+            <Route path="/sports" element={<Sports />} />
             <Route path="/events/user" element={<Events />} />
             <Route path="/centers/detail/:id" element={<Events />} />
             <Route path="/events/detail" element={<EventDetail />} />

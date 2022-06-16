@@ -22,6 +22,7 @@ export const Header = () => {
 
   const navLinks = [
     { user: user?.id, text: "Myevents", route: "/events/user" },
+    { user: true, text: t("header.sports"), route: "/sports" },
     { user: true, text: t("header.centers"), route: "/filtercenters" },
     { user: true, text: t("header.events"), route: "/filterevents" },
   ];
@@ -57,21 +58,24 @@ export const Header = () => {
           </Link>
           <nav className="header--nav">
             {navLinks.map((e, i) => {
+
               return (
-                <div
-                  key={i}
-                  className={
-                    i === navLinks.length - 1
-                      ? "header--nav-group header--nav-login"
-                      : "header--nav-group"
-                  }
-                >
-                  {e.user && (
-                    <Link to={e.route} className="header--nav-link">
-                      {e.text}
-                    </Link>
-                  )}
-                </div>
+                e.user !== undefined ?
+                  <div
+                    key={i}
+                    className={
+                      i === navLinks.length - 1
+                        ? "header--nav-group header--nav-login"
+                        : "header--nav-group"
+                    }
+                  >
+                    {e.user && (
+                      <Link to={e.route} className="header--nav-link">
+                        {e.text}
+                      </Link>
+                    )}
+                  </div>
+                  : null
               );
             })}
           </nav>

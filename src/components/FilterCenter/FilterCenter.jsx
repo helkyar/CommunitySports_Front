@@ -28,12 +28,10 @@ export const FilterCenter = ({ search }) => {
 
     const getData = async () => {
         if (search === 'center') {
-            const myData = await getCentersWithSports()
-            setData(myData)
+            setData(await getCentersWithSports())
             setDataFiltered([])
         } else {
-            const myData = await getCentersWithSports()
-            setData(myData)
+            setData(await getCentersWithSports())
             setDataFiltered([])
         }
     }
@@ -56,13 +54,14 @@ export const FilterCenter = ({ search }) => {
             }
 
             if (comp) {
-                center.distanceToPoint = distanceToPoint(myPosition.lat, myPosition.long, center.latitude, center.longitude)
-                myCenters.push(center)
+                const myDistance = distanceToPoint(myPosition.lat, myPosition.long, center.latitude, center.longitude)
+                if (myDistance < distance) {
+                    myCenters.push(center)
+                }
             }
         }
 
-        const myCentersByDistance = myCenters.filter(e => e.distanceToPoint < distance)
-        setDataFiltered(myCentersByDistance)
+        setDataFiltered(myCenters)
     }
 
     return (

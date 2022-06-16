@@ -108,11 +108,10 @@ export const FilterEvents = () => {
           />
         <DateCustom
           name='date'
+          type='date'
           label={t("forms.date")}
           errors={errorsFilter.date}
           control={controlFilter}
-          /* defaultValue={today} */
-          placeholder={t("forms.date")}
           id='date-input'
         />
         <div className="form-buttons">

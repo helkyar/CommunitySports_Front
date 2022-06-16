@@ -10,11 +10,11 @@ export const useSession = () => {
   const loger = useCallback(
     ({ username, password }) => {
       startSession({ username, password }, "login")
-        .then(({ token, username, id }) => {
+        .then(({ token, email, id }) => {
           window.sessionStorage.setItem("jwt", token);
-          window.sessionStorage.setItem("user", `{"id":"${id}", "username":"${username}"}`);
+          window.sessionStorage.setItem("user", `{"id":"${id}", "email":"${email}"}`);
           setJWT(token);
-          setUser({id, username});
+          setUser({ id, username });
         })
         .catch((err) => {
           logfail = true;

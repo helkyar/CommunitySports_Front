@@ -7,12 +7,15 @@ import { useSession } from "helpers/session/useSession";
 import InputCustom from "./forms/InputCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
 import { Button } from "@mui/material";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+
+
 
 const schema = yup.object().shape({
-  username: yup
+  email: yup
     .string()
     .trim()
+    .email()
     .min(6, "el campo debe tener minimo 6 caracteres"),
   password: yup
     .string()
@@ -36,9 +39,9 @@ export const Login = () => {
     console.log(data);
     //(!) Validation logic: should be separated form the view
     try {
-      const { username, password } = data;
+      const { email, password } = data;
       const credentials = {
-        username,
+        email,
         password,
       };
       loger(credentials);
@@ -59,7 +62,7 @@ export const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputCustom
-          name="username"
+          name="email"
           control={controlLogin}
           label="username"
           id="username-input"

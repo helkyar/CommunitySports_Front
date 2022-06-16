@@ -38,7 +38,7 @@ function App() {
             <Route path="/*" element={<Error />} />
           </Routes>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </UserContextProvider>
   );

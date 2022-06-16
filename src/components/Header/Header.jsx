@@ -124,7 +124,7 @@ export const Header = () => {
           {viewOptions ? (
             <section className="header--menu-modal">
               {navLinks.map((e, i) => {
-                return (
+                return e.user !== undefined ? (
                   <Link
                     to={e.route}
                     className="header--nav-link header--modal-link"
@@ -132,7 +132,7 @@ export const Header = () => {
                   >
                     {e.text}
                   </Link>
-                );
+                ) : null;
               })}
               <p onClick={() => setModal(true)} className="header--modal-login">{t("header.login")}</p>
               <button

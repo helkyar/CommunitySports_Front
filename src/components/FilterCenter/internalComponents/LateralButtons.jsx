@@ -27,7 +27,7 @@ export const LateralButtons = ({ adapt, setAdapt }) => {
                     <div key={i}>
                         <button
                             value={e.value}
-                            onClick={e => addAdapt(e.target.value)}
+                            onClick={() => addAdapt(e.value)}
                             className={
                                 adapt.indexOf(e.value, 0) === -1 ?
                                     "filter--button" : "filter--button-added"

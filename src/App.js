@@ -30,7 +30,7 @@ function App() {
             <Route path="/main" element={<Main />} />
             <Route path="/sports" element={<Sports />} />
             <Route path="/events/user" element={<Events />} />
-            <Route path="/centers/detail/:id" element={<Events />} />
+            <Route path="/events/center/:id" element={<Events />} />
             <Route path="/events/detail" element={<EventDetail />} />
             <Route path="/events/detail/:id" element={<EventDetail />} />
             <Route path="/filterevents" element={<FilterEvents />} />
@@ -38,7 +38,7 @@ function App() {
             <Route path="/*" element={<Error />} />
           </Routes>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </UserContextProvider>
   );

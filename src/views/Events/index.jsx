@@ -19,11 +19,11 @@ export const Events = () => {
         const data = await getUserEvents(user.id, jwt);
         // console.log(data.events);
         setEvents(data.events);
-      } else if (source.includes("/centers")) {
-        const id = source.split("/centers/detail/")[1];
+      } else if (source.includes("/center")) {
+        const id = source.split("/center/")[1];
         console.log("CENRTERS", id);
         const data = await getCenterEvents(id, jwt);
-        // console.log(data.events);
+        console.log(data.events);
         setEvents(data.events);
       }
     };
@@ -32,9 +32,15 @@ export const Events = () => {
 
   return (
     <>
-      {events.map((event, i) => (
-        <EventList key={`event-${i}`} event={event} />
-      ))}
+      {events[0] ? (
+        <>
+          {events.map((event, i) => (
+            <EventList key={`event-${i}`} event={event} />
+          ))}
+        </>
+      ) : (
+        <h1 className="no-event"> NO HAY EVENTOS DISPONIBLES </h1>
+      )}
       {/* <Map data={events} /> */}
     </>
   );

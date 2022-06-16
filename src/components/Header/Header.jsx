@@ -58,25 +58,22 @@ export const Header = () => {
           </Link>
           <nav className="header--nav">
             {navLinks.map((e, i) => {
-
-              return (
-                e.user !== undefined ?
-                  <div
-                    key={i}
-                    className={
-                      i === navLinks.length - 1
-                        ? "header--nav-group header--nav-login"
-                        : "header--nav-group"
-                    }
-                  >
-                    {e.user && (
-                      <Link to={e.route} className="header--nav-link">
-                        {e.text}
-                      </Link>
-                    )}
-                  </div>
-                  : null
-              );
+              return e.user !== undefined ? (
+                <div
+                  key={i}
+                  className={
+                    i === navLinks.length - 1
+                      ? "header--nav-group header--nav-login"
+                      : "header--nav-group"
+                  }
+                >
+                  {e.user && (
+                    <Link to={e.route} className="header--nav-link">
+                      {e.text}
+                    </Link>
+                  )}
+                </div>
+              ) : null;
             })}
           </nav>
         </div>

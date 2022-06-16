@@ -2,6 +2,7 @@
     "header": {
         "title": "Community Sports",
         "login": "Log in",
+        "logout":"Log out",
         "sports": "Sports",
         "centers": "Centers",
         "events": "Events",

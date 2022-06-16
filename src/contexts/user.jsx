@@ -7,6 +7,8 @@ export function UserContextProvider({ children }) {
   const [jwt, setJWT] = useState(() => window.sessionStorage.getItem("jwt"));
 
   useEffect(() => {
+    const aux = window.sessionStorage.getItem("user")
+    if (aux) {console.log(aux)}
     if (typeof user === "string") {
       const parsedUser = JSON.parse(user);
       setUser(parsedUser);

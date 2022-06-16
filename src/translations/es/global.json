@@ -1,7 +1,8 @@
 {
     "header": {
         "title": "Comunidad Deportiva",
-        "login": "Iniciar sesion",
+        "login": "Iniciar sesión",
+        "logout":"Cerrar sesión",
         "sports": "Deportes",
         "centers": "Centros",
         "events": "Eventos",

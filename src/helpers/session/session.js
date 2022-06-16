@@ -5,11 +5,13 @@ export default function startSession(sessionParams, endpoint) {
   return axios
     .post(`${ENDPOINT}/session/${endpoint}`, sessionParams)
     .then((res) => {
+      console.log(res)
       if (!res.data.token) throw new Error("Response is NOT ok");
+      console.log(res.data)
       return res.data;
     })
-    .catch(() => {
-      console.log("ERR: 500");
+    .catch((err) => {
+      console.log(err,"ERR: 500");
     });
   // return fetch(`${ENDPOINT}/session/${endpoint}`, {
   //   method: "POST",

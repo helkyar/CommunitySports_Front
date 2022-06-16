@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef , useContext} from "react";
 import { Link } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -9,10 +9,14 @@ import LanguageIcon from "@mui/icons-material/Language";
 import { useSession } from "helpers/session/useSession";
 import Modal from "components/Modal";
 import { Session } from "views/Session";
+import UserContextProvider from "contexts/user";
 
 export const Header = () => {
   const header = useRef(null);
-  const { user } = useSession();
+  /* const { user } = useSession(); */
+  /* const aux =  window.sessionStorage.getItem("user"); */
+  const { jwt, setJWT, user, setUser } = useContext(UserContextProvider);
+  /* const [ user , setUser] = useState(JSON.parse(aux)); */
   const [t, i18n] = useTranslation("global");
   const [navbar, setnavbar] = useState(false);
   const [modal, setModal] = useState(false);
@@ -43,6 +47,13 @@ export const Header = () => {
       return t("header.language.spanish");
     }
   };
+
+  const closeSession = () => {
+      setJWT(null)
+      setUser(null)
+      window.sessionStorage.removeItem("jwt");
+      window.sessionStorage.removeItem("user");
+  }
 
   window.addEventListener("scroll", changeHeader);
 
@@ -109,12 +120,18 @@ export const Header = () => {
             ) : null}
           </button>
 
+          {user? <button
+            onClick={closeSession}
+            className="header--button-login"
+          >
+            {t("header.logout")}
+          </button> :
           <button
             onClick={() => setModal(true)}
             className="header--button-login"
           >
-            {t("header.login")}
-          </button>
+            { t("header.login")}
+          </button>}
           <button
             className="header--button"
             onClick={() => setViewOptions(!viewOptions)}

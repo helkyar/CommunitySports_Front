@@ -7,12 +7,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useSession } from "helpers/session/useSession";
+import Modal from "components/Modal";
+import { Session } from "views/Session";
 
 export const Header = () => {
   const header = useRef(null);
   const { user } = useSession();
   const [t, i18n] = useTranslation("global");
   const [navbar, setnavbar] = useState(false);
+  const [modal, setModal] = useState(false);
+
   const [viewLanguages, setViewLanguages] = useState(false);
   const [viewOptions, setViewOptions] = useState(false);
 
@@ -104,7 +108,12 @@ export const Header = () => {
             ) : null}
           </button>
 
-          <button className="header--button-login">{t("header.login")}</button>
+          <button
+            onClick={() => setModal(true)}
+            className="header--button-login"
+          >
+            {t("header.login")}
+          </button>
           <button
             className="header--button"
             onClick={() => setViewOptions(!viewOptions)}
@@ -164,6 +173,9 @@ export const Header = () => {
           ) : null}
         </div>
       </div>
+      <Modal onOpen={modal} setOnOpen={setModal}>
+        <Session />
+      </Modal>
     </header>
   );
 };

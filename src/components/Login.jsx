@@ -7,23 +7,18 @@ import { useSession } from "helpers/session/useSession";
 import InputCustom from "./forms/InputCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
 import { Button } from "@mui/material";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
-
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const schema = yup.object().shape({
-  username:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-  ,
-  password:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-
-})
-
+  username: yup
+    .string()
+    .trim()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
+  password: yup
+    .string()
+    .trim()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
+});
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -38,20 +33,18 @@ export const Login = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     //(!) Validation logic: should be separated form the view
-    try{
-      const {username,password} = data
+    try {
+      const { username, password } = data;
       const credentials = {
         username,
-        password 
-      }
+        password,
+      };
       loger(credentials);
+    } catch (error) {
+      console.error(error);
     }
-    catch (error) {
-      console.error(error)
-    }
-    
   };
 
   useEffect(() => {
@@ -61,19 +54,22 @@ export const Login = () => {
 
   return (
     <>
-      <form className="login-form session-form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="login-form session-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <InputCustom
-          name='username'
+          name="username"
           control={controlLogin}
-          label='username'
-          id='username-input'
+          label="username"
+          id="username-input"
           errors={errorsLogin.username}
         />
         <InputCustomPassword
-          name='password'
+          name="password"
           control={controlLogin}
-          id='password-input'
-          label='password'
+          id="password-input"
+          label="password"
           errors={errorsLogin.password}
         />
         <Button variant="contained" type="submit" className="list--buttons">

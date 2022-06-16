@@ -19,8 +19,8 @@ export const Events = () => {
         const data = await getUserEvents(user.id, jwt);
         // console.log(data.events);
         setEvents(data.events);
-      } else if (source.includes("/center")) {
-        const id = source.split("/center/")[1];
+      } else if (source.includes("/centers")) {
+        const id = source.split("/centers/detail/")[1];
         console.log("CENRTERS", id);
         const data = await getCenterEvents(id, jwt);
         // console.log(data.events);

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import register from "helpers/session/session";
 import { useSession } from "helpers/session/useSession";
@@ -12,35 +12,22 @@ import { DateCustom } from "./forms/DateCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
 
 const schema = yup.object().shape({
-  username:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-  ,
-  email : yup
-  .string()
-  .email()
-  .required('email is required')
-  ,
-  age:yup 
-  .date()
-  .required('date of birth is required')
-  ,
-  password:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-  ,
-  passwordConfirmation : yup
-  .string()
-  .trim()
-  .oneOf([yup.ref('password'),null],'passwords must match')
-  ,
-  gender : yup
-  .string()
-  .required()
-})
-
+  username: yup
+    .string()
+    .trim()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
+  email: yup.string().email().required("email is required"),
+  age: yup.date().required("date of birth is required"),
+  password: yup
+    .string()
+    .trim()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
+  passwordConfirmation: yup
+    .string()
+    .trim()
+    .oneOf([yup.ref("password"), null], "passwords must match"),
+  gender: yup.string().required(),
+});
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -55,8 +42,8 @@ export const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
-   /*  e.preventDefault();
+    console.log(data);
+    /*  e.preventDefault();
     //(!) Validation logic: should be separated form the view
     if (!username.trim() || !password.trim()) {
       console.log("Introduce valid credentials");
@@ -78,50 +65,55 @@ export const Register = () => {
 
   return (
     <>
-      <form className="register-form session-form" onSubmit={handleSubmit(onSubmit)}>
-      <InputCustom
-          name='username'
+      <form
+        className="register-form session-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <InputCustom
+          name="username"
           control={controlRegister}
-          label='userName'
-          id='username-input'
+          label="userName"
+          id="username-input"
           errors={errorsRegister.username}
         />
         <InputCustom
-          name='email'
+          name="email"
           control={controlRegister}
-          label='email'
-          id='email-input'
+          label="email"
+          id="email-input"
           errors={errorsRegister.email}
         />
         <InputCustomPassword
-          name='password'
+          name="password"
           control={controlRegister}
-          id='password-input'
-          label='password'
+          id="password-input"
+          label="password"
           errors={errorsRegister.password}
         />
         <InputCustomPassword
-          name='passwordConfirmation'
+          name="passwordConfirmation"
           control={controlRegister}
-          id='passwordConfirmation-input'
-          label='confirm password'
+          id="passwordConfirmation-input"
+          label="confirm password"
           errors={errorsRegister.passwordConfirmation}
         />
         <DateCustom
-        name='age'
-        label='date of birth'
-        errors={errorsRegister.age}
-        control={controlRegister}
-        placeholder='date of birth'
-        id='date-input'/>
-        <SelectCustom
-          name='gender'
+          name="age"
+          label="date of birth"
+          errors={errorsRegister.age}
           control={controlRegister}
-          label='gender'
-          id='gender-input'
-          options={['male','female','other']}/>
+          placeholder="date of birth"
+          id="date-input"
+        />
+        <SelectCustom
+          name="gender"
+          control={controlRegister}
+          label="gender"
+          id="gender-input"
+          options={["male", "female", "other"]}
+        />
         <Button variant="contained" type="submit" className="list--buttons">
-          Register 
+          Register
         </Button>
       </form>
     </>

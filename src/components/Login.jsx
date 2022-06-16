@@ -7,6 +7,7 @@ import { useSession } from "helpers/session/useSession";
 import InputCustom from "./forms/InputCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
 import { Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -24,6 +25,7 @@ const schema = yup.object().shape({
 });
 
 export const Login = () => {
+  const [t, i18n] = useTranslation("global");
   const navigate = useNavigate();
   const { loger, isLogged, logfail } = useSession();
 
@@ -64,19 +66,19 @@ export const Login = () => {
         <InputCustom
           name="email"
           control={controlLogin}
-          label="username"
+          label={t('forms.email')}
           id="username-input"
-          errors={errorsLogin.username}
+          errors={errorsLogin.email}
         />
         <InputCustomPassword
           name="password"
           control={controlLogin}
           id="password-input"
-          label="password"
+          label={t('forms.password')}
           errors={errorsLogin.password}
         />
         <Button variant="contained" type="submit" className="list--buttons">
-          Login
+          {t('header.login')}
         </Button>
       </form>
     </>

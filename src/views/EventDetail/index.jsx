@@ -4,12 +4,20 @@ import postUserEvent from "helpers/events/postUserEvent";
 import { useSession } from "helpers/session/useSession";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"
+import Map from '../../components/Map/Map'
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import HearingIcon from '@mui/icons-material/Hearing';
+
 
 export const EventDetail = () => {
   const { user, jwt } = useSession();
   const navigate = useNavigate();
   const [inscribed, setInscribed] = useState(false);
   const [event, setEvent] = useState(useLocation().state);
+  const [t] = useTranslation("global");
+
 
   useEffect(() => {
     async function fetchdata() {
@@ -58,38 +66,45 @@ export const EventDetail = () => {
     <>
       {event?.id ? (
         <div className="event-info">
-          <p className="event-detail">
+          <div className="event-info-detail">
             <span className="event-propertie__name">{event.name}</span>
-            <span className="event-propertie__time">{event.time}</span>
+            <span className="event-propertie__time">{new Date(event.time).toLocaleDateString()}</span>
             <span className="event-propertie__direction">
               {event.direction}
             </span>
             <span className="event-propertie__email">{event.email} </span>
             <span className="event-propertie__hour">{event.hour}</span>
             <span className="event-propertie__organizer">
-              {event.organizer}
+              {event.organizer? event.organizer : t(`forms.no-organizer`)}
             </span>
             <span className="event-propertie__sex">{event.sex}</span>
-            <span className="event-propertie__mobility">
-              ​{event.mobility} ​{" "}
+
+            <span>
+              <span className="event-propertie__capacity">{t(`forms.capacity`)}</span>
+              <span className="event-propertie__capacity">  {event.capacity}</span>
             </span>
-            <span className="event-propertie__magnetic">
-              {event.ind_magnetica}
+            <span>
+              <span className="event-propertie__capacity">{t(`forms.places`)} </span>
+              <span className="event-propertie__users">
+                {event.users ? event.capacity - event.users.length : event.capacity}
+              </span>
             </span>
-            <span className="event-propertie__podotactile">
-              {event.podotactile} ​{" "}
-            </span>
-            <span className="event-propertie__capacity">{event.capacity}</span>
-            <span className="event-propertie__users">
-              {event.users ? event.users.length : "0"}
-            </span>
+            <div className="event-logos">
+              {event.mobility === 1 ? <AccessibleForwardIcon/>: null}
+              {event.podotactile === 1 ? <VisibilityIcon/>: null}
+              {event.ind_magnetica === 1 ? <HearingIcon/>: null}
+            </div>
             {/* ​​ ​{event.id_center} {event.id_event} ​ {event.id_sport} {event.longitude} {event.latitude} */}
-          </p>
-          {user?.id && (
+          {/* </p> */}
+          {/* {user?.id && ( */}
+          <div className="event-info-button">
             <button onClick={() => handleClick()}>
-              {inscribed ? "Abandonar " : "Inscribirme "}
+              {inscribed ? `${t("forms.leave")}` : `${t("forms.signIn")}`}
             </button>
-          )}
+          </div>
+         {/*  )} */}
+              </div>
+          <div className="event--map"><Map data={[event]} homes={{lat:event.latitude, lng:event.longitude}}/></div>
         </div>
       ) : (
         <h1>No hay evevntos disponibles</h1>

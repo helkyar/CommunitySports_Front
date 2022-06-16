@@ -60,7 +60,11 @@
         "sex": "Sexo",
         "gender" : "género",
         "search": "Buscar",
-        "back": "Atrás"
+        "back": "Atrás",
+        "leave": "Abandonar evento",
+        "signIn": "Inscribirse",
+        "no-organizer": "Sin organizador",
+        "places": "Plazas disponibles"
     },
     "sports": {
         "Atletismo": "Atletismo",

@@ -134,7 +134,7 @@ export const Header = () => {
                   </Link>
                 );
               })}
-              <p className="header--modal-login">{t("header.login")}</p>
+              <p onClick={() => setModal(true)} className="header--modal-login">{t("header.login")}</p>
               <button
                 className="header--button header--close"
                 onClick={() => setViewOptions(!viewOptions)}

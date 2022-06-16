@@ -16,7 +16,6 @@ import startSession from "helpers/session/session";
 const genders = ['male','female','other']
 
 const schema = yup.object().shape({
-<<<<<<< HEAD
   username:yup
   .string()
   .trim()
@@ -52,24 +51,6 @@ const schema = yup.object().shape({
 
 })
 
-=======
-  username: yup
-    .string()
-    .trim()
-    .min(6, "el campo debe tener minimo 6 caracteres"),
-  email: yup.string().email().required("email is required"),
-  age: yup.date().required("date of birth is required"),
-  password: yup
-    .string()
-    .trim()
-    .min(6, "el campo debe tener minimo 6 caracteres"),
-  passwordConfirmation: yup
-    .string()
-    .trim()
-    .oneOf([yup.ref("password"), null], "passwords must match"),
-  gender: yup.string().required(),
-});
->>>>>>> feb51f6c6f771ce6f01c8333bcd75496e2fe3d63
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -84,7 +65,6 @@ export const Register = () => {
   });
 
   const onSubmit = async (data) => {
-<<<<<<< HEAD
     startSession({
       name:data.name,
       age:data.age,
@@ -94,44 +74,16 @@ export const Register = () => {
       subscriber:data.subscriber
     },'register')
    
-=======
-    console.log(data);
-    /*  e.preventDefault();
-    //(!) Validation logic: should be separated form the view
-    if (!username.trim() || !password.trim()) {
-      console.log("Introduce valid credentials");
-      return;
-    }
-    const credentials = { username, password };
-    //------------------------------------------------------
-    await register(credentials, "register");
-
-    // Maybe an ineficient way to handle login
-    await loger(credentials);
-    setUsername("");
-    setPassword(""); */
->>>>>>> feb51f6c6f771ce6f01c8333bcd75496e2fe3d63
   };
 
   useEffect(() => {
     if (isLogged) navigate("/");
   }, [isLogged, navigate]);
 
-<<<<<<< HEAD
   return (<>
       <form className="session-form" onSubmit={handleSubmit(onSubmit)}>
       <InputCustom
           name='username'
-=======
-  return (
-    <>
-      <form
-        className="register-form session-form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <InputCustom
-          name="username"
->>>>>>> feb51f6c6f771ce6f01c8333bcd75496e2fe3d63
           control={controlRegister}
           label="userName"
           id="username-input"
@@ -159,7 +111,6 @@ export const Register = () => {
           errors={errorsRegister.passwordConfirmation}
         />
         <DateCustom
-<<<<<<< HEAD
         name='age'
         label='Birthday'
         errors={errorsRegister.age}
@@ -177,22 +128,6 @@ export const Register = () => {
           control={controlRegister}
           errors={errorsRegister.subscriber}
           label='subscriber'/>
-=======
-          name="age"
-          label="date of birth"
-          errors={errorsRegister.age}
-          control={controlRegister}
-          placeholder="date of birth"
-          id="date-input"
-        />
-        <SelectCustom
-          name="gender"
-          control={controlRegister}
-          label="gender"
-          id="gender-input"
-          options={["male", "female", "other"]}
-        />
->>>>>>> feb51f6c6f771ce6f01c8333bcd75496e2fe3d63
         <Button variant="contained" type="submit" className="list--buttons">
           Register
         </Button>

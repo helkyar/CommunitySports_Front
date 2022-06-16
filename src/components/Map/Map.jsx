@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import { GoogleMap, useJsApiLoader , Marker , MarkerClusterer, TransitLayer } from '@react-google-maps/api';
 import house from '../../assets/img/home_icon.png';
-import pin from '../../assets/img/chincheBig.png'
+import pin from '../../assets/img/chinche.png'
 import { useTranslation } from "react-i18next"
+import axios from 'axios'
 
 
 const containerStyle = {
@@ -10,23 +12,29 @@ const containerStyle = {
   height: '100%'
 };
 
-function Map({data,homes}) {
+function Map({data,homes,fiter}) {
+  console.log(data)
   const [t] = useTranslation("global");
-
+  const navigate = useNavigate();
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_MY_API_KEY
   })
   const [map, setMap] = useState(null)
-  const [mapCenter, setMapCenter] = useState(homes || {lat:data[parseInt(data.length/2)].Longitud,lng:data[parseInt(data.length/2)].Latitud})
+  const [mapCenter, setMapCenter] = useState({lat: 40.417163732639686, lng: -3.705418109893799})
   const [zoomClick, setZoomClick] = useState(15)
   const [modalInfo, setModalInfo] = useState()
+  const [markerId, setMarkerId] = useState()
   const [modal, setModal] = useState(false)
  
   
-  const onLoad = ()=> {
+  const onLoad = async ()=> {
+   /*  const aaa = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?${process.env.REACT_APP_MY_API_KEY}`) */
+   /*  const aaa = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_MY_API_KEY}`)
+    console.log(aaa) */
     function success(pos) {
       var crd = pos.coords;
+      
 
       setMapCenter({lat:crd.latitude,lng:crd.longitude});
     };
@@ -39,9 +47,6 @@ function Map({data,homes}) {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
-  
-
-
   const handleForm = ()=> {
     console.log('open form')
   }
@@ -51,16 +56,23 @@ function Map({data,homes}) {
     setMapCenter({lat:e.latLng.lat(e),lng:e.latLng.lng(e)})
   }
 
+  const getInfo = (e)=> {
+    console.log(e)
+  }
+
   const handleMarker = (e)=>{
+    setMarkerId(e.id)
+    delete e.id;
     setModalInfo(e)
     setModal(true)
   }
   const getCoordenates = (e)=> {
+    console.log(e)
     console.log({lat:e.latLng.lat(e),lng:e.latLng.lng(e)})
   }
 
   return isLoaded ? (
-    <main style={{width:"100vw",height:"90vh"}}>
+    <main className ="map--container"/* style={{width:"100vw",height:"90vh"}} */>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={mapCenter}
@@ -81,29 +93,30 @@ function Map({data,homes}) {
           <MarkerClusterer averageCenter= {true}>
           {(clusterer)=> data.map((e,index)=> 
           <Marker id={index} key={index}
-            position={{lat:e.Longitud, lng:e.Latitud}}
+            position={{lat:e.latitude, lng:e.longitude}}
             clusterer={clusterer}
             onClick={()=>handleMarker(e)}
+            onMouseDown={getInfo}
           /> )}
           </MarkerClusterer>
         <TransitLayer />
       </GoogleMap>
-      {modal && <div className="event-modal" style= {{backgroundColor:"yellow"}}>
-            <ul className="event-modal-labels">
+      {modal &&  
+        <div className="event--modal">
+              <button type="button" onClick={()=>setModal(false)}>X</button>
+          <div className="event--modal-info">
                 {Object.keys(modalInfo).map((e,index)=>
-                <li className='event-modal-list-labels' id={`label${index}`}>{t(`forms.${e}`)}</li> 
+                <span className='event--modal-list-labels' key={`label${index}`}>{t(`forms.${e}`)}</span> 
                 )}
-            </ul>
-            <ul className="event-modal-values">
                 {Object.values(modalInfo).map((e,index)=>
-                <li className='event-modal-list-labels' id={`value${index}`}>{e}</li>
+                (e===0 || e===1)? 
+                <span className='event--modal-list-values' key={`value${index}`}>{e===1? t(`forms.yes`):t(`forms.no`)}</span>:
+                <span className='event--modal-list-values' key={`value${index}`}>{e}</span>
                 )}
-            </ul>
-            <button type="button" onClick={()=>console.log('apuntarse')}>{t("forms.signEvent")}</button>
-            <button type="button" onClick={()=>setModal(false)}>X</button>
+          </div>
+          {modalInfo.capacity? <button type="button" onClick={(e)=> navigate(`/events/detail/${markerId}`)}>+ info</button>:
+          <button type="button" onClick={(e)=> navigate(`/centers/detail/${markerId}`)}>+ info</button>}
         </div>}
-
-      <button type="button" onClick={handleForm}>Create Itinerary</button>
     </main>
   ) : <h1>Charging...</h1>
 }

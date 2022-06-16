@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import register from "helpers/session/session";
+
 import { useSession } from "helpers/session/useSession";
 import { Button } from "@mui/material";
 import * as yup from "yup";
@@ -10,7 +10,8 @@ import InputCustom from "./forms/InputCustom";
 import { SelectCustom } from "./forms/SelectCustom";
 import { DateCustom } from "./forms/DateCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
-import { CreateEvent } from "./CreateEvent";
+import CheckboxCustom from "./forms/CheckboxCustom";
+import startSession from "helpers/session/session";
 
 const genders = ['male','female','other']
 
@@ -39,10 +40,15 @@ const schema = yup.object().shape({
   .trim()
   .oneOf([yup.ref('password'),null],'passwords must match')
   ,
-  gender : yup
+  genre : yup
   .string()
   .oneOf(genders)
+  .required(),
+
+  subscriber:yup
+  .boolean()
   .required()
+
 })
 
 
@@ -59,21 +65,15 @@ export const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
-   /*  e.preventDefault();
-    //(!) Validation logic: should be separated form the view
-    if (!username.trim() || !password.trim()) {
-      console.log("Introduce valid credentials");
-      return;
-    }
-    const credentials = { username, password };
-    //------------------------------------------------------
-    await register(credentials, "register");
-
-    // Maybe an ineficient way to handle login
-    await loger(credentials);
-    setUsername("");
-    setPassword(""); */
+    startSession({
+      name:data.name,
+      age:data.age,
+      genre:data.genre,
+      email:data.email,
+      password:data.password,
+      subscriber:data.subscriber
+    },'register')
+   
   };
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export const Register = () => {
   }, [isLogged, navigate]);
 
   return (<>
-      <form className="register-form session-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="session-form" onSubmit={handleSubmit(onSubmit)}>
       <InputCustom
           name='username'
           control={controlRegister}
@@ -118,16 +118,21 @@ export const Register = () => {
         type='date'
         id='date-input'/>
         <SelectCustom
-          name='gender'
+          name='genre'
           control={controlRegister}
           label='gender'
           id='gender-input'
           options={genders}/>
+          <CheckboxCustom
+          name='subscriber'
+          control={controlRegister}
+          errors={errorsRegister.subscriber}
+          label='subscriber'/>
         <Button variant="contained" type="submit" className="list--buttons">
           Register 
         </Button>
       </form>
-      <CreateEvent/>
+     
     </>
   );
 };

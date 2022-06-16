@@ -8,29 +8,48 @@
         "language": {
             "spanish": "Spanish",
             "english": "English"
-        },
-        "footer": {
-            "who": "About us",
-            "contact": "Contact",
-            "ask": "FAQ'S"
-        },
-        "forms": {
-            "sport": "Sport",
-            "type": "Type",
-            "date": "Date",
-            "time": "Time",
-            "center": "Center",
-            "movility": "Movility",
-            "signEvent": "Sign Event",
-            "Centro": "Center",
-            "Direccion": "Address",
-            "Latitud": "Latitude",
-            "Longitud": "Longitude",
-            "Telefono": "Phone",
-            "Movilidad": "Movility",
-            "Podotactil": "Podotactil",
-            "Ind_magnetica": "Ind-Magnetica",
-            "email": "Email"
         }
+    },
+    "footer": {
+        "who": "About us",
+        "contact": "Contact",
+        "ask": "FAQ'S"
+    },
+    "forms": {
+        "accessibility":"Accesibility",
+        "activity":"Activity",
+        "author":"Author",
+        "capacity":"Capacity",
+        "date":"Date",
+        "sport": "Sport",
+        "type": "Tipo",
+        "hour":"Hour",
+        "time": "Hour",
+        "name":"Name",
+        "organizer":"Organizer",
+        "id":"id",
+        "id_sport":"id_sport",
+        "level":"Level",
+        "center": "Center",
+        "direction": "Address",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "phone": "Phone",
+        "mobility": "Movility",
+        "podotactile": "Podotactil",
+        "ind_magnetica": "Magnetic-Ind",
+        "email": "Email",
+        "yes":"Yes",
+        "no":"No",
+        "male":"Male",
+        "female":"Female",
+        "other":"Other",
+        "maleTeam":"Men",
+        "femaleTeam":"Women",
+        "mixTeam":"Mixed",
+        "sex":"Sex",
+        "search":"Search",
+        "back":"Back"
     }
 }
+

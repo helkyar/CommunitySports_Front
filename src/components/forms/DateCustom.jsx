@@ -1,7 +1,7 @@
 import React from 'react'
 import { Controller } from "react-hook-form";
 import {
-    TextField, InputAdornment
+    TextField
   } from "@mui/material";
 
 
@@ -10,6 +10,7 @@ export const DateCustom = ({name, control, label, id,type, errors,defaultValue,}
         <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
             <TextField
             {...field}

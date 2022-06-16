@@ -35,8 +35,8 @@ export const Events = () => {
   const { jwt, user } = useSession();
   const [event, setEvent] = useState({});
   const [showMap, setShowMap] = useState({});
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const handleCreate = async (e) => {
     e.preventDefault();
     setEvent((prevState) => {

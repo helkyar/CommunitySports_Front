@@ -1,0 +1,19 @@
+.map-filtered {
+    width: 80%;
+    height: 50vh;
+    margin:auto;
+}
+.login-form {
+    width: 80%;
+    margin:auto;
+}
+.form-buttons{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content:center;
+    width: 60%;
+    margin:auto;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    column-gap: 1rem;
+}

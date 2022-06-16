@@ -1,0 +1,14 @@
+.session-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    justify-content: center;
+}
+.session-form > div{
+    width: 300px;
+}
+.date-error-message{
+    color:red
+}

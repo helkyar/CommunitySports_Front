@@ -26,7 +26,7 @@ export const Sports = () => {
                 sports.map((e, i) => {
                     const eventsWithSport = event.filter(thisEvent => thisEvent.id_sport === e.id)
                     return (
-                        <ItemSports sport={e} index={i} events={eventsWithSport} />
+                        <ItemSports key={i} sport={e} index={i} events={eventsWithSport} />
                     )
                 })
                 : null}

@@ -15,7 +15,7 @@ export const ItemSports = ({ sport, index, events }) => {
     }
 
     return (
-        <section className={deploy ? `item_sports--main-item item_sports--item-${index} item_sports--main-item-deploy` : `item_sports--main-item item_sports--item-${index}`}>
+        <section key={`${index}-${sport}`} className={deploy ? `item_sports--main-item item_sports--item-${index} item_sports--main-item-deploy` : `item_sports--main-item item_sports--item-${index}`}>
             <div className="item_sports--slot-title">
                 <h5 className="item_sports--item-title">{t(`sports.${removeAccents(sport.name)}`)}</h5>
                 {deploy ? <button className="item_sports--button-deploy" onClick={e => setDeploy(!deploy)}><KeyboardArrowUpIcon fontSize="large" /></button>
@@ -28,7 +28,7 @@ export const ItemSports = ({ sport, index, events }) => {
                     <h4 className="item_sports--events-title">Events</h4>
                     {events.map((e, i) => {
                         if (i < 3) {
-                            return <ItemEvent event={e} />
+                            return <ItemEvent event={e} key={i} />
                         }
 
                     })}

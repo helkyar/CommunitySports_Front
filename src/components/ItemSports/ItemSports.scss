@@ -3,6 +3,7 @@
     box-shadow: -3px 5px 5px $primary-color-deg;
     color: #fff;
     width: 50%;
+    min-height: 60px;
     margin-bottom: 20px;
     border-radius: 0px 20px 20px 0px;
     padding-left: 3%;
@@ -47,7 +48,7 @@
     top: 0px;
     right: 20px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: auto;
     text-align: center;
     border-radius: 20px;
@@ -69,6 +70,14 @@
     &:hover {
         box-shadow: 0 0 10px $secondary-color-deg;
     }
+}
+
+.item_sports--event-subtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
 }
 
 .item_sports--Link {

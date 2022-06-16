@@ -1,0 +1,11 @@
+.form--date-input,
+.form--input-text {
+    width: 100%;
+}
+
+@media (max-width: 400px) {
+    .form--date-input,
+    .form--input-text {
+        width: 80% !important;
+    }
+}

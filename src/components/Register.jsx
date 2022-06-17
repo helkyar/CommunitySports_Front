@@ -54,7 +54,7 @@ const schema = yup.object().shape({
 
 export const Register = () => {
   const navigate = useNavigate();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const { loger, isLogged } = useSession();
 
 
@@ -66,8 +66,11 @@ export const Register = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  
 
-  const onSubmit = async (data) => {
+  const onSubbmit = async (data) => {
+    console.log('en onSubmit')
+    console.log(data)
     startSession({
       name:data.name,
       age:data.age,
@@ -78,13 +81,68 @@ export const Register = () => {
     },'register')
    
   };
-
+  console.log(isLogged)
   useEffect(() => {
+    console.log('en useeffect')
     if (isLogged) navigate("/");
   }, [isLogged, navigate]);
 
-  return (<>
-      <form className="session-form" onSubmit={handleSubmit(onSubmit)}>
+  return (
+      <form className="session-form" onSubmit={handleSubmit(onSubbmit)}>
+        <InputCustom
+          name='username'
+          control={controlRegister}
+          label={t('forms.username')}
+          id="username-input"
+          errors={errorsRegister.username}
+        />
+        <InputCustom
+          name="email"
+          control={controlRegister}
+          label={t('forms.email')}
+          id="email-input"
+          errors={errorsRegister.email}
+        />
+        <InputCustomPassword
+          name="password"
+          control={controlRegister}
+          id="password-input"
+          label={t('forms.password')}
+          errors={errorsRegister.password}
+        />
+        <InputCustomPassword
+          name="passwordConfirmation"
+          control={controlRegister}
+          id="passwordConfirmation-input"
+          label={t('forms.confirm-password')}
+          errors={errorsRegister.passwordConfirmation}
+        />
+        <DateCustom
+          name='age'
+          label={t('forms.Birthday')}
+          errors={errorsRegister.age}
+          control={controlRegister}
+          type='date'
+          id='date-input'
+        />
+        <SelectCustom
+          name='genre'
+          control={controlRegister}
+          label={t('forms.gender')}
+          id='gender-input'
+          options={genders}
+        />
+        <CheckboxCustom
+          name='subscriber'
+          control={controlRegister}
+          errors={errorsRegister.subscriber}
+          label='subscriber'
+        />
+        <Button variant="contained" type="submmit" onClick= {()=>console.log('enviando formulario')} className="list--buttons">
+          {t('forms.register')}
+        </Button>
+      </form>
+/*       <form className="session-form" onSubmit={handleSubmit(onSubbmit)}>
       <InputCustom
           name='username'
           control={controlRegister}
@@ -131,11 +189,10 @@ export const Register = () => {
           control={controlRegister}
           errors={errorsRegister.subscriber}
           label='subscriber'/>
-        <Button variant="contained" type="submit" className="list--buttons">
+        <Button variant="contained" type='submit' onClick= {()=>console.log('enviando formulario')} className="list--buttons">
           {t('forms.register')}
         </Button>
-      </form>
+      </form> */
      
-    </>
   );
 };

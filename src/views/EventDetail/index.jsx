@@ -43,19 +43,30 @@ export const EventDetail = () => {
 
   const handleClick = () => {
     inscribed ? handleLeave() : handleInscription();
-    setInscribed(!inscribed);
+
   };
 
   const handleInscription = async () => {
     console.log(event.id, "EVENTID");
     if (event?.id && user?.id) {
-      await postUserEvent({ id_user: user.id, id_event: event.id }, jwt);
+      try {
+        await postUserEvent({ id_user: user.id, id_event: event.id }, jwt);
+        setInscribed(!inscribed);
+      } catch (err) {
+        console.log(err);
+      }
+
     }
   };
 
   const handleLeave = async () => {
     if (event && user?.id) {
-      await delUserEvent({ id_user: user.id, id_event: event.id }, jwt);
+      try {
+        await delUserEvent({ id_user: user.id, id_event: event.id }, jwt);
+        setInscribed(!inscribed);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 

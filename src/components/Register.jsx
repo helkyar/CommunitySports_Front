@@ -18,6 +18,15 @@ import UserContextProvider from "contexts/user";
 const genders = ['male', 'female', 'other']
 
 const schema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .email()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
+  password: yup
+    .string()
+    .trim()
+    .min(6, "el campo debe tener minimo 6 caracteres"),
   /*   username: yup
       .string()
       .trim()

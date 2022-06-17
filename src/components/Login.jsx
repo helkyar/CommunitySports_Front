@@ -25,7 +25,7 @@ const schema = yup.object().shape({
 });
 
 export const Login = () => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const navigate = useNavigate();
   const { loger, isLogged, logfail } = useSession();
 

@@ -3,11 +3,18 @@ import postUserEvent from "helpers/events/postUserEvent";
 import { useSession } from "helpers/session/useSession";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import HearingIcon from '@mui/icons-material/Hearing';
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+import Map from '../../components/Map/Map'
+
 
 export const EventList = ({ event }) => {
   const navigate = useNavigate();
   const { user, jwt } = useSession();
   const [inscribed, setInscribed] = useState(false);
+  const [t] = useTranslation("global");
 
   useEffect(() => {
     setInscribed(
@@ -38,44 +45,48 @@ export const EventList = ({ event }) => {
     <>
       {event?.id ? (
         <div className="event-info">
-          <p
-            className="link"
-            onClick={() => navigate("/events/detail", { state: event })}
-          >
-            <span className="event-propertie__name">{event.name}</span>
-            <span className="event-propertie__time">{event.time}</span>
-            <span className="event-propertie__direction">
-              {event.direction}
-            </span>
-            <span className="event-propertie__email">{event.email} </span>
-            <span className="event-propertie__hour">{event.hour}</span>
-            <span className="event-propertie__organizer">
-              {event.organizer}
-            </span>
-            <span className="event-propertie__sex">{event.sex}</span>
-            <span className="event-propertie__mobility">
-              ​{event.mobility} ​{" "}
-            </span>
-            <span className="event-propertie__magnetic">
-              {event.ind_magnetica}
-            </span>
-            <span className="event-propertie__podotactile">
-              {event.podotactile} ​{" "}
-            </span>
-            <span className="event-propertie__capacity">{event.capacity}</span>
+        <div className="event-info-detail">
+          <span className="event-propertie__name">{event.name}</span>
+          <span className="event-propertie__direction">
+            {event.direction}
+          </span>
+          <span className="event-propertie__email">{event.email} </span>
+          <span className="event-propertie__time">{new Date(event.time).toLocaleDateString()}</span>
+          <span className="event-propertie__hour">{event.hour}</span>
+          <span className="event-propertie__organizer">
+            {event.organizer ? event.organizer : t(`forms.no-organizer`)}
+          </span>
+          <span className="event-propertie__sex">{event.sex}</span>
+
+          {/* <span>
+            <span className="event-propertie__capacity">{t(`forms.capacity`)}</span>
+            <span className="event-propertie__capacity">  {event.capacity}</span>
+          </span>
+          <span>
+            <span className="event-propertie__capacity">{t(`forms.places`)} </span>
             <span className="event-propertie__users">
-              {event.users ? event.users.length : "0"}
+              {event.users ? event.capacity - event.users.length : event.capacity}
             </span>
-            {/* ​​ ​{event.id_center} {event.id_event} ​ {event.id_sport} {event.longitude} {event.latitude} */}
-          </p>
-          {user?.id && (
+          </span> */}
+          <div className="event-logos">
+            {event.mobility === 1 ? <AccessibleForwardIcon /> : null}
+            {event.podotactile === 1 ? <VisibilityIcon /> : null}
+            {event.ind_magnetica === 1 ? <HearingIcon /> : null}
+          </div>
+          {/* ​​ ​{event.id_center} {event.id_event} ​ {event.id_sport} {event.longitude} {event.latitude} */}
+          {/* </p> */}
+          {/* {user?.id && ( */}
+          <div className="event-info-button">
             <button onClick={() => handleClick()}>
-              {inscribed ? "Abandonar " : "Inscribirme "}
+              {!inscribed ? `${t("forms.leave")}` : `${t("forms.signIn")}`}
             </button>
-          )}
+          </div>
+          {/*  )} */}
         </div>
+        <div className="event--map"><Map data={[event]} homes={{ lat: event.latitude, lng: event.longitude }} /></div>
+      </div>
       ) : (
-        <h1>no hay evevntos disponibles</h1>
+        <h1>{t('no-events')}</h1>
       )}
     </>
   );

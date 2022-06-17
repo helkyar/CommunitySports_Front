@@ -62,7 +62,8 @@
         "leave": "Leave event",
         "signIn": "Sign In",
         "no-organizer": "No organizer",
-        "places": "Available places"
+        "places": "Available places",
+        "no-events":"No available events"
     },
     "sports": {
         "Atletismo": "Athletics",

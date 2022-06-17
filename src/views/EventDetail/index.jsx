@@ -91,11 +91,11 @@ export const EventDetail = () => {
         <div className="event-info">
           <div className="event-info-detail">
             <span className="event-propertie__name">{event.name}</span>
-            <span className="event-propertie__time">{new Date(event.time).toLocaleDateString()}</span>
             <span className="event-propertie__direction">
               {event.direction}
             </span>
             <span className="event-propertie__email">{event.email} </span>
+            <span className="event-propertie__time">{new Date(event.time).toLocaleDateString()}</span>
             <span className="event-propertie__hour">{event.hour}</span>
             <span className="event-propertie__organizer">
               {event.organizer ? event.organizer : t(`forms.no-organizer`)}
@@ -130,7 +130,7 @@ export const EventDetail = () => {
           <div className="event--map"><Map data={[event]} homes={{ lat: event.latitude, lng: event.longitude }} /></div>
         </div>
       ) : (
-        <h1>No hay evevntos disponibles</h1>
+        <h1>{t('forms.no-events')}</h1>
       )}
     </>
   );

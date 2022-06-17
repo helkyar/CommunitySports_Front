@@ -65,7 +65,7 @@ const schema = yup.object().shape({
 export const Register = () => {
   const { jwt, setJWT, user, setUser } = useContext(UserContextProvider);
   const navigate = useNavigate();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const { loger, isLogged } = useSession();
 
 
@@ -77,6 +77,7 @@ export const Register = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  
 
   const onSubmit = async (data) => {
     const myNewUser = await startSession({

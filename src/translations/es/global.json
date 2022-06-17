@@ -65,7 +65,8 @@
         "leave": "Abandonar evento",
         "signIn": "Inscribirse",
         "no-organizer": "Sin organizador",
-        "places": "Plazas disponibles"
+        "places": "Plazas disponibles",
+        "no-events":"No hay eventos disponibles"
     },
     "sports": {
         "Atletismo": "Atletismo",

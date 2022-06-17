@@ -9,14 +9,31 @@ import Map from '../../components/Map/Map'
 import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import HearingIcon from '@mui/icons-material/Hearing';
+import getUserEvents from "helpers/events/getUserEvents";
 
 
 export const EventDetail = () => {
   const { user, jwt } = useSession();
   const navigate = useNavigate();
-  const [inscribed, setInscribed] = useState(false);
   const [event, setEvent] = useState(useLocation().state);
+  const [inscribed, setInscribed] = useState();
   const [t] = useTranslation("global");
+
+
+
+  const comprobateInscription = async (theEvent) => {
+    if (!user) return null //Si no estas logeado nada
+
+    const allEventsOfUser = await getUserEvents(user.id, jwt)
+    for (const myEvent of allEventsOfUser.events) {
+      console.log(myEvent.id === theEvent.id);
+      if (myEvent.id === theEvent.id) {
+        setInscribed(true)
+        break;
+      }
+      setInscribed(false)
+    }
+  }
 
   useEffect(() => {
     async function fetchdata() {
@@ -26,6 +43,7 @@ export const EventDetail = () => {
         console.log("event", idEvent);
         const data = await getEvent(idEvent, jwt);
         console.log("DATA", data);
+        await comprobateInscription(data.event)
         setEvent(data.event);
       }
     }
@@ -35,15 +53,12 @@ export const EventDetail = () => {
 
   useEffect(() => {
     if (event) {
-      setInscribed(
-        event.users && event.users.some((userId) => userId === user?.id)
-      );
+      if (!user) setInscribed(false)
     }
   }, [user]);
 
   const handleClick = () => {
     inscribed ? handleLeave() : handleInscription();
-
   };
 
   const handleInscription = async () => {
@@ -69,8 +84,6 @@ export const EventDetail = () => {
       }
     }
   };
-
-  console.log(event);
 
   return (
     <>

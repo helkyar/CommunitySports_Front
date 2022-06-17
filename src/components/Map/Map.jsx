@@ -119,12 +119,12 @@ function Map({ data, homes, filter, setMyPosition }) {
           <button type="button" onClick={() => setModal(false)}>X</button>
           <div className="event--modal-info">
             {Object.keys(modalInfo).map((e, index) =>
-              <span className='event--modal-list-labels' key={`label${index}`}>{t(`forms.${e}`)}</span>
+              <span className='event--modal-list-labels' key={`label${index}`}>{index===16? t('forms.date'):t(`forms.${e}`)}</span>
             )}
             {Object.values(modalInfo).map((e, index) =>
               (e === 0 || e === 1) ?
                 <span className='event--modal-list-values' key={`value${index}`}>{e === 1 ? t(`forms.yes`) : t(`forms.no`)}</span> :
-                <span className='event--modal-list-values' key={`value${index}`}>{e}</span>
+                <span className='event--modal-list-values' key={`value${index}`}>{index===16? new Date(e).toLocaleDateString():e}</span>
             )}
           </div>
           {modalInfo.capacity ? <button type="button" onClick={(e) => navigate(`/events/detail/${markerId}`)}>+ info</button> :

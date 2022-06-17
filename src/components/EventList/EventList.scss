@@ -1,5 +1,7 @@
 .link {
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 .no-event {
   margin: 3rem auto;

@@ -12,6 +12,8 @@ import { DateCustom } from "./forms/DateCustom";
 import InputCustomPassword from "./forms/InputCustomPassword";
 import CheckboxCustom from "./forms/CheckboxCustom";
 import startSession from "helpers/session/session";
+import { useCallback, useContext } from "react";
+import UserContextProvider from "contexts/user";
 
 const genders = ['male', 'female', 'other']
 
@@ -52,6 +54,7 @@ const schema = yup.object().shape({
 
 
 export const Register = () => {
+  const { jwt, setJWT, user, setUser } = useContext(UserContextProvider);
   const navigate = useNavigate();
   const [t, i18n] = useTranslation("global");
   const { loger, isLogged } = useSession();
@@ -67,7 +70,7 @@ export const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    await startSession({
+    const myNewUser = await startSession({
       username: data.username,
       age: data.age,
       genre: data.genre,
@@ -76,6 +79,13 @@ export const Register = () => {
       subscriber: data.subscriber
     }, 'register')
 
+
+    window.sessionStorage.setItem("jwt", myNewUser.token);
+    window.sessionStorage.setItem("user", `{"id":"${myNewUser.id}", "email":"${myNewUser.email}"}`);
+    setJWT(myNewUser.token)
+    setUser({ id: myNewUser.id, email: myNewUser.email })
+
+    console.log(myNewUser);
   };
 
   /*   useEffect(() => {

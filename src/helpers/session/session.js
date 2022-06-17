@@ -1,7 +1,7 @@
 import axios from "axios";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 
-export default function startSession(sessionParams, endpoint) {
+export default async function startSession(sessionParams, endpoint) {
   return axios
     .post(`${ENDPOINT}/session/${endpoint}`, sessionParams)
     .then((res) => {
@@ -11,7 +11,7 @@ export default function startSession(sessionParams, endpoint) {
       return res.data;
     })
     .catch((err) => {
-      console.log(err,"ERR: 500");
+      console.log(err, "ERR: 500");
     });
   // return fetch(`${ENDPOINT}/session/${endpoint}`, {
   //   method: "POST",

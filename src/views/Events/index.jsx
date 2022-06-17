@@ -1,11 +1,12 @@
 import Map from "components/Map/Map";
-import { EventList } from "components/EventList";
+
 import { useSession } from "helpers/session/useSession";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import getCenterEvents from "helpers/events/getCenterEvents";
 import getUserEvents from "helpers/events/getUserEvents";
+import { EventList } from "components/EventList";
 
 export const Events = () => {
   const { jwt, user } = useSession();

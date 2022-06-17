@@ -18,7 +18,6 @@ export const EventDetail = () => {
   const [event, setEvent] = useState(useLocation().state);
   const [t] = useTranslation("global");
 
-
   useEffect(() => {
     async function fetchdata() {
       if (!event) {
@@ -75,7 +74,7 @@ export const EventDetail = () => {
             <span className="event-propertie__email">{event.email} </span>
             <span className="event-propertie__hour">{event.hour}</span>
             <span className="event-propertie__organizer">
-              {event.organizer? event.organizer : t(`forms.no-organizer`)}
+              {event.organizer ? event.organizer : t(`forms.no-organizer`)}
             </span>
             <span className="event-propertie__sex">{event.sex}</span>
 
@@ -90,21 +89,21 @@ export const EventDetail = () => {
               </span>
             </span>
             <div className="event-logos">
-              {event.mobility === 1 ? <AccessibleForwardIcon/>: null}
-              {event.podotactile === 1 ? <VisibilityIcon/>: null}
-              {event.ind_magnetica === 1 ? <HearingIcon/>: null}
+              {event.mobility === 1 ? <AccessibleForwardIcon /> : null}
+              {event.podotactile === 1 ? <VisibilityIcon /> : null}
+              {event.ind_magnetica === 1 ? <HearingIcon /> : null}
             </div>
             {/* ​​ ​{event.id_center} {event.id_event} ​ {event.id_sport} {event.longitude} {event.latitude} */}
-          {/* </p> */}
-          {/* {user?.id && ( */}
-          <div className="event-info-button">
-            <button onClick={() => handleClick()}>
-              {inscribed ? `${t("forms.leave")}` : `${t("forms.signIn")}`}
-            </button>
+            {/* </p> */}
+            {/* {user?.id && ( */}
+            <div className="event-info-button">
+              <button onClick={() => handleClick()}>
+                {inscribed ? `${t("forms.leave")}` : `${t("forms.signIn")}`}
+              </button>
+            </div>
+            {/*  )} */}
           </div>
-         {/*  )} */}
-              </div>
-          <div className="event--map"><Map data={[event]} homes={{lat:event.latitude, lng:event.longitude}}/></div>
+          <div className="event--map"><Map data={[event]} homes={{ lat: event.latitude, lng: event.longitude }} /></div>
         </div>
       ) : (
         <h1>No hay evevntos disponibles</h1>

@@ -66,7 +66,7 @@ export const EventDetail = () => {
     if (event?.id && user?.id) {
       try {
         await postUserEvent({ id_user: user.id, id_event: event.id }, jwt);
-        setInscribed(!inscribed);
+        await comprobateInscription(event);
       } catch (err) {
         console.log(err);
       }
@@ -78,7 +78,7 @@ export const EventDetail = () => {
     if (event && user?.id) {
       try {
         await delUserEvent({ id_user: user.id, id_event: event.id }, jwt);
-        setInscribed(!inscribed);
+        await comprobateInscription(event);
       } catch (err) {
         console.log(err);
       }

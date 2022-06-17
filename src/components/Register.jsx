@@ -13,42 +13,41 @@ import InputCustomPassword from "./forms/InputCustomPassword";
 import CheckboxCustom from "./forms/CheckboxCustom";
 import startSession from "helpers/session/session";
 
-const genders = ['male','female','other']
+const genders = ['male', 'female', 'other']
 
 const schema = yup.object().shape({
-  username:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-  ,
-  email : yup
-  .string()
-  .email()
-  .required('email is required')
-  ,
-  age:yup 
-  .date()
-  .required('date of birth is required')
-  ,
-  password:yup
-  .string()
-  .trim()
-  .min(6,'el campo debe tener minimo 6 caracteres')
-  ,
-  passwordConfirmation : yup
-  .string()
-  .trim()
-  .oneOf([yup.ref('password'),null],'passwords must match')
-  ,
-  genre : yup
-  .string()
-  .oneOf(genders)
-  .required(),
-
-  subscriber:yup
-  .boolean()
-  .required()
-
+  /*   username: yup
+      .string()
+      .trim()
+      .min(6, 'el campo debe tener minimo 6 caracteres')
+    ,
+    email: yup
+      .string()
+      .email()
+      .required('email is required')
+    ,
+    age: yup
+      .date()
+      .required('date of birth is required')
+    ,
+    password: yup
+      .string()
+      .trim()
+      .min(6, 'el campo debe tener minimo 6 caracteres')
+    ,
+    passwordConfirmation: yup
+      .string()
+      .trim()
+      .oneOf([yup.ref('password'), null], 'passwords must match')
+    ,
+    genre: yup
+      .string()
+      .oneOf(genders)
+      .required(),
+  
+    subscriber: yup
+      .boolean()
+   */
 })
 
 
@@ -68,74 +67,75 @@ export const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    startSession({
-      name:data.name,
-      age:data.age,
-      genre:data.genre,
-      email:data.email,
-      password:data.password,
-      subscriber:data.subscriber
-    },'register')
-   
+    await startSession({
+      username: data.username,
+      age: data.age,
+      genre: data.genre,
+      email: data.email,
+      password: data.password,
+      subscriber: data.subscriber
+    }, 'register')
+
   };
 
-  useEffect(() => {
-    if (isLogged) navigate("/");
-  }, [isLogged, navigate]);
+  /*   useEffect(() => {
+      if (isLogged) navigate("/");
+    }, [isLogged, navigate]); */
+
 
   return (<>
-      <form className="session-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="session-form" onSubmit={handleSubmit(onSubmit)}>
       <InputCustom
-          name='username'
-          control={controlRegister}
-          label={t('forms.username')}
-          id="username-input"
-          errors={errorsRegister.username}
-        />
-        <InputCustom
-          name="email"
-          control={controlRegister}
-          label={t('forms.email')}
-          id="email-input"
-          errors={errorsRegister.email}
-        />
-        <InputCustomPassword
-          name="password"
-          control={controlRegister}
-          id="password-input"
-          label={t('forms.password')}
-          errors={errorsRegister.password}
-        />
-        <InputCustomPassword
-          name="passwordConfirmation"
-          control={controlRegister}
-          id="passwordConfirmation-input"
-          label={t('forms.confirm-password')}
-          errors={errorsRegister.passwordConfirmation}
-        />
-        <DateCustom
+        name='username'
+        control={controlRegister}
+        label={t('forms.username')}
+        id="username-input"
+        errors={errorsRegister.username}
+      />
+      <InputCustom
+        name="email"
+        control={controlRegister}
+        label={t('forms.email')}
+        id="email-input"
+        errors={errorsRegister.email}
+      />
+      <InputCustomPassword
+        name="password"
+        control={controlRegister}
+        id="password-input"
+        label={t('forms.password')}
+        errors={errorsRegister.password}
+      />
+      <InputCustomPassword
+        name="passwordConfirmation"
+        control={controlRegister}
+        id="passwordConfirmation-input"
+        label={t('forms.confirm-password')}
+        errors={errorsRegister.passwordConfirmation}
+      />
+      <DateCustom
         name='age'
         label={t('forms.Birthday')}
         errors={errorsRegister.age}
         control={controlRegister}
         type='date'
-        id='date-input'/>
-        <SelectCustom
-          name='genre'
-          control={controlRegister}
-          label={t('forms.gender')}
-          id='gender-input'
-          options={genders}/>
-          <CheckboxCustom
-          name='subscriber'
-          control={controlRegister}
-          errors={errorsRegister.subscriber}
-          label='subscriber'/>
-        <Button variant="contained" type="submit" className="list--buttons">
-          {t('forms.register')}
-        </Button>
-      </form>
-     
-    </>
+        id='date-input' />
+      <SelectCustom
+        name='genre'
+        control={controlRegister}
+        label={t('forms.gender')}
+        id='gender-input'
+        options={genders} />
+      <CheckboxCustom
+        name='subscriber'
+        control={controlRegister}
+        errors={errorsRegister.subscriber}
+        label='subscriber' />
+      <Button variant="contained" type="submit" className="list--buttons">
+        {t('forms.register')}
+      </Button>
+    </form>
+
+  </>
   );
 };
